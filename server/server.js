@@ -10,9 +10,6 @@ const auth = require('./lib/auth')
 const users = require('./lib/users')
 const session = require('./lib/session')
 
-// jwt
-const apiRoutes = require('./routes/api')
-
 // sessions / cookies
 const indexRoutes = require('./routes')
 
@@ -31,7 +28,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use('/', indexRoutes) // this uses cookies!! -- example of server side
-app.use('/api/', apiRoutes) // this uses jwt!! -- example of client side
 
 passport.use(new LocalStrategy(auth.verify))
 passport.use(new FacebookStrategy(auth.facebookOptions, auth.facebookVerify))
