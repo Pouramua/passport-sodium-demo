@@ -1,6 +1,6 @@
+const express = require('express')
 const bodyParser = require('body-parser')
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn
-const express = require('express')
 const passport = require('passport')
 const users = require('../lib/users')
 
@@ -11,6 +11,7 @@ router.get('/login', (req, res) => {
   res.render('login', { flash: req.flash('error') })
 })
 
+//flash message
 router.post('/login',
   passport.authenticate('local', {
     successRedirect: '/',
@@ -18,6 +19,12 @@ router.post('/login',
     failureFlash: true
   })
 )
+
+// failureFlash
+// passport.authenticate('local', { failureFlash: 'Invalid username or password.' })
+
+// successFlash
+// passport.authenticate('local', { successFlash: 'Welcome!' });
 
 router.get('/logout', (req, res) => {
   req.logout()
